@@ -1,0 +1,212 @@
+/* ── General repeater rows ───────────────────────────────────────────────── */
+.ctb-field-row,
+.ctb-award-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* ── Custom Fields ───────────────────────────────────────────────────────── */
+/* WP admin forza width:99% sugli input → usiamo flex + max-width per vincerla */
+.ctb-field-key {
+    flex: 0 0 auto;
+    width: 150px !important;
+    max-width: 150px;
+}
+.ctb-field-value {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* ── Awards ──────────────────────────────────────────────────────────────── */
+.ctb-award-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+}
+
+.ctb-logo-preview {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.ctb-award-name,
+.ctb-award-event {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.ctb-award-year {
+    flex: 0 0 auto;
+    width: 90px !important;
+    max-width: 90px;
+}
+
+/* ── Gallery thumbnails ──────────────────────────────────────────────────── */
+.ctb-gallery-thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.ctb-gallery-item {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    cursor: grab;
+}
+
+.ctb-gallery-item:active {
+    cursor: grabbing;
+}
+
+.ctb-gallery-placeholder {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #c3c4c7;
+    border-radius: 4px;
+    background: #f6f7f7;
+}
+
+.ctb-gallery-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: block;
+}
+
+.ctb-gallery-remove {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.15s, background 0.15s;
+}
+
+.ctb-gallery-item:hover .ctb-gallery-remove {
+    opacity: 1;
+}
+
+.ctb-gallery-remove:hover {
+    background: #a00;
+}
+
+/* ── Drag handle ─────────────────────────────────────────────────────────── */
+.ctb-drag-handle {
+    flex: 0 0 auto;
+    color: #c3c4c7;
+    cursor: grab;
+    font-size: 16px;
+    width: 16px !important;
+    height: 16px !important;
+    line-height: 1;
+    transition: color 0.1s;
+}
+.ctb-drag-handle:hover { color: #2271b1; }
+
+/* ── Sortable row placeholder ────────────────────────────────────────────── */
+.ctb-row-placeholder {
+    border: 2px dashed #c3c4c7;
+    border-radius: 3px;
+    background: #f6f7f7;
+    height: 34px;
+    margin-bottom: 6px;
+}
+
+/* ── Remove (×) button ───────────────────────────────────────────────────── */
+.ctb-remove-row {
+    color: #a00;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0 4px;
+}
+.ctb-remove-row:hover { color: #d00; }
+
+/* ── Utility ─────────────────────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── Plugin banner ───────────────────────────────────────────────────────── */
+.ctb-banner-row td {
+    padding: 16px 0 8px !important;
+    border-bottom: none !important;
+}
+.ctb-plugin-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-left: 4px solid #2271b1;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+.ctb-plugin-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ctb-plugin-name    { font-size: 15px; font-weight: 700; color: #1d2327; }
+.ctb-plugin-version { font-size: 11px; font-weight: 500; color: #2271b1; background: #dce6f5; padding: 1px 7px; border-radius: 10px; }
+.ctb-plugin-tagline { margin: 0; font-size: 12px; color: #646970; }
+
+/* ── Module card ─────────────────────────────────────────────────────────── */
+.ctb-module-row td {
+    padding: 4px 0 20px !important;
+    border-bottom: none !important;
+}
+.ctb-module {
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    background: #fff;
+    overflow: hidden;
+}
+.ctb-module-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 11px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #1d2327;
+    background: #f6f7f7;
+    border-bottom: 1px solid #c3c4c7;
+}
+.ctb-module-title .dashicons {
+    color: #2271b1;
+    font-size: 15px;
+    width: 15px;
+    height: 15px;
+    line-height: 1;
+}
+.ctb-module-body {
+    padding: 16px;
+}
+.ctb-module-body details { margin-top: 10px; }
+.ctb-module-body details summary { cursor: pointer; color: #2271b1; font-size: 12px; }

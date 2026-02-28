@@ -1,0 +1,119 @@
+# CartTrigger – BAG — Traducción española
+# Copyright (C) 2024 Poletto 1976 S.L.U.
+# This file is distributed under the same license as the CartTrigger – BAG plugin.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: CartTrigger – BAG 2.0.0\n"
+"Report-Msgid-Bugs-To: https://poletto.es\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: Poletto 1976 S.L.U. <info@poletto.es>\n"
+"Language-Team: Spanish <es@li.org>\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: CartTrigger BAG\n"
+"X-Domain: carttrigger-bag\n"
+
+#: carttrigger-bag.php
+msgid "Select image"
+msgstr "Seleccionar imagen"
+
+#: carttrigger-bag.php
+msgid "Use image"
+msgstr "Usar imagen"
+
+#: carttrigger-bag.php
+msgid "Label"
+msgstr "Etiqueta"
+
+#: carttrigger-bag.php
+msgid "Value"
+msgstr "Valor"
+
+#: carttrigger-bag.php
+msgid "Award name"
+msgstr "Nombre del premio"
+
+#: carttrigger-bag.php
+msgid "Event (e.g. Vinum Extra 2024)"
+msgstr "Manifestación (p. ej. Vinum Extra 2024)"
+
+#: carttrigger-bag.php
+msgid "Year"
+msgstr "Año"
+
+#: carttrigger-bag.php
+msgid "HTML Description"
+msgstr "Descripción HTML"
+
+#: carttrigger-bag.php
+msgid "Custom Fields"
+msgstr "Campos personalizados"
+
+#: carttrigger-bag.php
+msgid "+ Add field"
+msgstr "+ Añadir campo"
+
+#: carttrigger-bag.php
+msgid "HTML structure and customisable classes"
+msgstr "Estructura HTML y clases personalizables"
+
+#: carttrigger-bag.php
+msgid "Generated structure:"
+msgstr "Estructura generada:"
+
+#: carttrigger-bag.php
+msgid "Shortcode attributes (with defaults):"
+msgstr "Atributos del shortcode (con valores por defecto):"
+
+#: carttrigger-bag.php
+msgid "Usage from PHP template (recommended):"
+msgstr "Uso desde plantilla PHP (recomendado):"
+
+#: carttrigger-bag.php
+msgid "The helper function bypasses the WP shortcode parser: Tailwind arbitrary-value classes (text-[11px]) work without any escaping."
+msgstr "La función helper bypassa el parser de shortcodes de WP: las clases Tailwind con valores arbitrarios (text-[11px]) funcionan sin ningún escaping."
+
+#: carttrigger-bag.php
+msgid "Awards"
+msgstr "Premios"
+
+#: carttrigger-bag.php
+msgid "Logo"
+msgstr "Logo"
+
+#: carttrigger-bag.php
+msgid "+ Add award"
+msgstr "+ Añadir premio"
+
+#: carttrigger-bag.php
+msgid "The helper function bypasses the WP parser: text-[11px] classes work without escaping and the title is translated with your theme text domain."
+msgstr "La función helper bypassa el parser de WP: las clases text-[11px] funcionan sin escaping y el título se traduce con el text domain de tu tema."
+
+#: carttrigger-bag.php
+msgid "Gallery"
+msgstr "Galería"
+
+#: carttrigger-bag.php
+msgid "Manage gallery"
+msgstr "Gestionar galería"
+
+#: carttrigger-bag.php
+msgid "Native WooCommerce lightbox (PhotoSwipe):"
+msgstr "Lightbox nativo WooCommerce (PhotoSwipe):"
+
+#: carttrigger-bag.php
+msgid "Add lightbox=\"1\" to open images in the native WooCommerce lightbox. Without this attribute images open in a new tab (default behaviour)."
+msgstr "Añade lightbox=\"1\" para abrir las imágenes en el lightbox nativo de WooCommerce. Sin este atributo las imágenes se abren en nueva pestaña (comportamiento por defecto)."
+
+#: carttrigger-bag.php
+msgid "activated successfully."
+msgstr "activado correctamente."
+
+#: carttrigger-bag.php
+msgid "Manage brands"
+msgstr "Gestionar marcas"

@@ -1,0 +1,120 @@
+# CartTrigger – BAG
+# Copyright (C) 2024 Poletto 1976 S.L.U.
+# This file is distributed under the same license as the CartTrigger – BAG plugin.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CartTrigger – BAG 2.0.0\n"
+"Report-Msgid-Bugs-To: https://poletto.es\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: CartTrigger BAG\n"
+"X-Domain: carttrigger-bag\n"
+
+#: carttrigger-bag.php
+msgid "Select image"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Use image"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Label"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Value"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Award name"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Event (e.g. Vinum Extra 2024)"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Year"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "HTML Description"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Custom Fields"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "+ Add field"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "HTML structure and customisable classes"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Generated structure:"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Shortcode attributes (with defaults):"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Usage from PHP template (recommended):"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "The helper function bypasses the WP shortcode parser: Tailwind arbitrary-value classes (text-[11px]) work without any escaping."
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Awards"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Logo"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "+ Add award"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "The helper function bypasses the WP parser: text-[11px] classes work without escaping and the title is translated with your theme text domain."
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Gallery"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Manage gallery"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Native WooCommerce lightbox (PhotoSwipe):"
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Add lightbox=\"1\" to open images in the native WooCommerce lightbox. Without this attribute images open in a new tab (default behaviour)."
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "activated successfully."
+msgstr ""
+
+#: carttrigger-bag.php
+msgid "Manage brands"
+msgstr ""
