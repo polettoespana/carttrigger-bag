@@ -10,8 +10,6 @@
 
 **BAG** stands for **Brand · Awards · Gallery**. A WooCommerce plugin that extends the native brand taxonomy with custom fields, award badges, and lifestyle image galleries — all managed from a clean card-based admin UI, with shortcodes and PHP helpers for full frontend flexibility.
 
----
-
 ## Modules
 
 ### Brand · Custom Fields
@@ -23,37 +21,76 @@ Manage awards and recognitions per brand — optional logo, award name, event na
 ### Brand · Gallery
 Upload a curated image gallery per brand. Display it as a responsive grid with optional native WooCommerce lightbox (PhotoSwipe). Images can be removed individually and reordered by drag & drop.
 
----
-
 ## Shortcodes
 
-| Shortcode | Description |
-|-----------|-------------|
-| `[ctb_custom_fields]` | Outputs brand custom fields as a `<dl>` list |
-| `[ctb_awards]` | Outputs brand awards as a styled card list |
-| `[ctb_gallery]` | Outputs brand gallery as a responsive image grid |
+On a brand taxonomy page the `brand` attribute is optional — the plugin auto-detects the current term.
 
-### Parameters
+### `[ctb_custom_fields]`
 
-**`[ctb_custom_fields brand="slug" wrapper_class="..." dt_class="..." dd_class="..."]`**
+```
+[ctb_custom_fields
+  brand="slug"
+  wrapper_class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl"
+  dt_class="font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/40 mb-1"
+  dd_class="font-inter text-sm text-blu-900"
+]
+```
 
-**`[ctb_awards brand="slug" title="Awards" wrapper_class="..." card_class="..."]`**
+### `[ctb_awards]`
 
-**`[ctb_gallery brand="slug" title="Gallery" wrapper_class="..." lightbox="1"]`**
+```
+[ctb_awards
+  brand="slug"
+  title="Awards"
+  title_class="editorial-label block mb-6"
+  line_class="line-deco w-20 mb-10"
+  wrapper_class="flex flex-col divide-y divide-blu-900/8 max-w-2xl"
+  card_class="flex items-start gap-4 py-5"
+  img_class="w-10 h-10 object-contain shrink-0 opacity-70 mt-0.5"
+  name_class="font-grotesk text-sm text-blu-900 leading-snug"
+  event_class="font-inter text-xs text-blu-800/60 mt-1"
+  year_class="font-mono-accent text-xs text-blu-800/40 block mt-1"
+]
+```
 
----
+### `[ctb_gallery]`
+
+```
+[ctb_gallery
+  brand="slug"
+  title="Gallery"
+  title_class="editorial-label block mb-6"
+  line_class="line-deco w-20 mb-10"
+  wrapper_class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
+  item_class="block aspect-square overflow-hidden group"
+  img_class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+  size_thumb="medium_large"
+  size_full="large"
+  lightbox="1"
+]
+```
 
 ## PHP helpers
 
-All shortcodes are also available as direct PHP functions — useful when Tailwind arbitrary-value classes (e.g. `text-[11px]`) would otherwise be mangled by the WordPress shortcode parser:
+All shortcodes are also available as direct PHP functions — recommended when using Tailwind arbitrary-value classes (e.g. `text-[11px]`) that would otherwise be mangled by the WordPress shortcode parser:
 
 ```php
-echo ctb_custom_fields(['wrapper_class' => 'grid grid-cols-2 gap-4']);
-echo ctb_awards(['title' => __('Awards', 'your-textdomain')]);
-echo ctb_gallery(['title' => __('Gallery', 'your-textdomain'), 'lightbox' => '1']);
-```
+echo ctb_custom_fields([
+    'wrapper_class' => 'grid grid-cols-2 gap-4',
+    'dt_class'      => 'text-[10px] uppercase tracking-widest',
+]);
 
----
+echo ctb_awards([
+    'title'         => __('Awards', 'your-textdomain'),
+    'wrapper_class' => 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4',
+    'card_class'    => 'flex flex-col items-center text-center p-5 border aspect-square',
+]);
+
+echo ctb_gallery([
+    'title'    => __('Gallery', 'your-textdomain'),
+    'lightbox' => '1',
+]);
+```
 
 ## Admin UI
 
@@ -66,8 +103,6 @@ echo ctb_gallery(['title' => __('Gallery', 'your-textdomain'), 'lightbox' => '1'
 
 All modules are grouped in collapsible card panels with a built-in shortcode reference.
 
----
-
 ## Requirements
 
 - WordPress **6.3** or later
@@ -76,15 +111,11 @@ All modules are grouped in collapsible card panels with a built-in shortcode ref
 
 Tested with WordPress **6.7** and WooCommerce **10.5.2**.
 
----
-
 ## Installation
 
 1. Clone this repository or download the ZIP and upload to `/wp-content/plugins/`.
 2. Activate the plugin from **Plugins** in your WordPress admin.
 3. Navigate to **Products → Brands** and edit any brand to start adding content.
-
----
 
 ## Changelog
 
@@ -103,7 +134,5 @@ Tested with WordPress **6.7** and WooCommerce **10.5.2**.
 - HTML Description module with TinyMCE editor on Add and Edit brand screens.
 - Native WooCommerce lightbox (PhotoSwipe) support for gallery shortcode.
 - Plugin fully internationalised — translations for Italian (it\_IT) and Spanish (es\_ES).
-
----
 
 [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html) — developed by [Poletto 1976 S.L.U.](https://poletto.es)
