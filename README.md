@@ -13,12 +13,15 @@
 ## Modules
 
 ### Brand · Custom Fields
+
 Attach unlimited key–value pairs to any brand. Output them anywhere via shortcode or PHP helper. CSS classes are fully customisable, including Tailwind arbitrary-value classes (e.g. `text-[11px]`).
 
 ### Brand · Awards
+
 Manage awards and recognitions per brand — optional logo, award name, event name, and year. Display them as a styled card list.
 
 ### Brand · Gallery
+
 Upload a curated image gallery per brand. Display it as a responsive grid with optional native WooCommerce lightbox (PhotoSwipe). Images can be removed individually and reordered by drag & drop.
 
 ## Shortcodes
@@ -94,22 +97,22 @@ echo ctb_gallery([
 
 ## Admin UI
 
-| Module | Features |
-|--------|----------|
-| **HTML Description** | TinyMCE editor on both Add and Edit brand screens |
-| **Custom Fields** | Key–value repeater with drag & drop reordering via handle icon |
-| **Awards** | Logo upload, event name, year — drag & drop reordering |
-| **Gallery** | Multi-image uploader, × button for individual removal on hover, drag & drop reordering |
+| Module               | Features                                                                               |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| **HTML Description** | TinyMCE editor on both Add and Edit brand screens                                      |
+| **Custom Fields**    | Key–value repeater with drag & drop reordering via handle icon                         |
+| **Awards**           | Logo upload, event name, year — drag & drop reordering                                 |
+| **Gallery**          | Multi-image uploader, × button for individual removal on hover, drag & drop reordering |
 
 All modules are grouped in collapsible card panels with a built-in shortcode reference.
 
 ## Requirements
 
 - WordPress **6.3** or later
-- WooCommerce *(required, 8.0+ recommended)*
+- WooCommerce _(required, 8.0+ recommended)_
 - PHP **7.4** or later
 
-Tested with WordPress **6.7** and WooCommerce **10.5.2**.
+Tested with WordPress **6.7** and WooCommerce **10.5.3**.
 
 ## Installation
 
@@ -120,19 +123,22 @@ Tested with WordPress **6.7** and WooCommerce **10.5.2**.
 ## Changelog
 
 ### 2.0.4
+
 - Gallery: individual image removal with an × button on hover, without reopening the media uploader.
 - Gallery: drag & drop reordering of thumbnails (jQuery UI Sortable).
 - Custom Fields: drag & drop reordering via a handle icon.
 - Awards: drag & drop reordering via a handle icon.
 
 ### 2.0.3
+
 - Fix: double-quote characters in award names, event names, and custom field values were corrupted on save. Awards and custom fields are now stored as native PHP arrays via `maybe_serialize()`.
 - Fix: accented characters (é, à, ó…) in award/field text were silently dropped on some server configurations. Replaced `sanitize_text_field()` with `wp_strip_all_tags()`.
 
 ### 2.0.0
+
 - Complete rewrite with professional admin UI (module cards).
 - HTML Description module with TinyMCE editor on Add and Edit brand screens.
 - Native WooCommerce lightbox (PhotoSwipe) support for gallery shortcode.
-- Plugin fully internationalised — translations for Italian (it\_IT) and Spanish (es\_ES).
+- Plugin fully internationalised — translations for Italian (it_IT) and Spanish (es_ES).
 
 [GPLv2 or later](https://www.gnu.org/licenses/gpl-2.0.html) — developed by [Poletto 1976 S.L.U.](https://poletto.es)
