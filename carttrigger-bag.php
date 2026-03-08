@@ -217,7 +217,7 @@ class CTBAG_CartTrigger_BAG
   &lt;/div&gt;
 &lt;/dl&gt;</pre>
                                 <p style="margin:0 0 6px;font-weight:600;"><?php esc_html_e('Shortcode attributes (with defaults):', 'carttrigger-bag'); ?></p>
-                                <pre style="margin:0;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctb_custom_fields
+                                <pre style="margin:0;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctbag_custom_fields
   brand="slug"
   wrapper_class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl"
   dt_class="font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/40 mb-1"
@@ -305,7 +305,7 @@ class CTBAG_CartTrigger_BAG
   &lt;/div&gt;
 &lt;/div&gt;</pre>
                                 <p style="margin:0 0 6px;font-weight:600;"><?php esc_html_e('Shortcode attributes (with defaults):', 'carttrigger-bag'); ?></p>
-                                <pre style="margin:0 0 12px;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctb_awards
+                                <pre style="margin:0 0 12px;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctbag_awards
   brand="slug"
   title="Awards"
   title_class="editorial-label block mb-6"
@@ -386,7 +386,7 @@ class CTBAG_CartTrigger_BAG
                                 <p style="margin:0 0 4px;font-weight:600;"><?php esc_html_e('Native WooCommerce lightbox (PhotoSwipe):', 'carttrigger-bag'); ?></p>
                                 <p style="margin:0 0 8px;color:#646970;"><?php esc_html_e('Add lightbox="1" to open images in the native WooCommerce lightbox. Without this attribute images open in a new tab (default behaviour).', 'carttrigger-bag'); ?></p>
                                 <p style="margin:0 0 6px;font-weight:600;"><?php esc_html_e('Shortcode attributes (with defaults):', 'carttrigger-bag'); ?></p>
-                                <pre style="margin:0 0 12px;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctb_gallery
+                                <pre style="margin:0 0 12px;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctbag_gallery
   brand="slug"
   title="Gallery"
   title_class="editorial-label block mb-6"
@@ -615,7 +615,7 @@ class CTBAG_CartTrigger_BAG
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // 6. FRONTEND: SHORTCODE [ctb_awards]
+    // 6. FRONTEND: SHORTCODE [ctbag_awards]
     // ═══════════════════════════════════════════════════════════════════════════
 
     public function ctb_awards_shortcode($atts)
@@ -684,12 +684,12 @@ class CTBAG_CartTrigger_BAG
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // 6b. SHORTCODE [ctb_custom_fields]
+    // 6b. SHORTCODE [ctbag_custom_fields]
     //
     // Usage:
-    //   [ctb_custom_fields]                        ← auto-detect brand on tax page
-    //   [ctb_custom_fields brand="slug"]           ← explicit brand
-    //   [ctb_custom_fields wrapper_class="..." dt_class="..." dd_class="..."]
+    //   [ctbag_custom_fields]                        ← auto-detect brand on tax page
+    //   [ctbag_custom_fields brand="slug"]           ← explicit brand
+    //   [ctbag_custom_fields wrapper_class="..." dt_class="..." dd_class="..."]
     // ═══════════════════════════════════════════════════════════════════════════
 
     public function ctb_custom_fields_shortcode($atts)
@@ -732,12 +732,12 @@ class CTBAG_CartTrigger_BAG
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // 6c. SHORTCODE [ctb_gallery]
+    // 6c. SHORTCODE [ctbag_gallery]
     //
     // Usage:
-    //   [ctb_gallery]                              ← auto-detect brand on tax page
-    //   [ctb_gallery brand="slug"]                 ← explicit brand
-    //   [ctb_gallery wrapper_class="..." item_class="..." img_class="..."]
+    //   [ctbag_gallery]                              ← auto-detect brand on tax page
+    //   [ctbag_gallery brand="slug"]                 ← explicit brand
+    //   [ctbag_gallery wrapper_class="..." item_class="..." img_class="..."]
     // ═══════════════════════════════════════════════════════════════════════════
 
     public function ctb_gallery_shortcode($atts)
@@ -884,7 +884,7 @@ class CTBAG_CartTrigger_BAG
 
     /**
      * Enqueue PhotoSwipe JS + register the footer output — called once per page
-     * the first time a [ctb_gallery lightbox="1"] shortcode renders.
+     * the first time a [ctbag_gallery lightbox="1"] shortcode renders.
      */
     private function ctb_maybe_enqueue_gallery_lightbox()
     {
