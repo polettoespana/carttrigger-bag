@@ -2,10 +2,10 @@
 Contributors: poletto1976
 Tags: woocommerce, brands, awards, gallery, brand management
 Requires at least: 6.3
-Tested up to: 6.7
+Tested up to: 6.9
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,24 +19,24 @@ Enhance WooCommerce brands with custom fields, awards badges, and lifestyle gall
 Attach unlimited key–value pairs to any brand. Output them anywhere via shortcode or PHP helper function. CSS classes are fully customisable, including Tailwind arbitrary-value classes (e.g. `text-[11px]`).
 
 = Awards =
-Manage a list of awards and recognitions for each brand — with optional logo, award name, event name, and year. Display them as a styled list using the `[ctb_awards]` shortcode.
+Manage a list of awards and recognitions for each brand — with optional logo, award name, event name, and year. Display them as a styled list using the `[ctbag_awards]` shortcode.
 
 = Gallery =
-Upload a curated image gallery per brand. Display it as a responsive grid with the `[ctb_gallery]` shortcode. Optional native WooCommerce lightbox (PhotoSwipe) via `lightbox="1"`.
+Upload a curated image gallery per brand. Display it as a responsive grid with the `[ctbag_gallery]` shortcode. Optional native WooCommerce lightbox (PhotoSwipe) via `lightbox="1"`.
 
 = Shortcodes =
 
-**`[ctb_custom_fields]`**
+**`[ctbag_custom_fields]`**
 Outputs brand custom fields as a `<dl>` list.
 
     [ctb_custom_fields brand="slug" wrapper_class="..." dt_class="..." dd_class="..."]
 
-**`[ctb_awards]`**
+**`[ctbag_awards]`**
 Outputs brand awards as a styled card list.
 
     [ctb_awards brand="slug" title="Awards" wrapper_class="..." card_class="..."]
 
-**`[ctb_gallery]`**
+**`[ctbag_gallery]`**
 Outputs brand gallery as a responsive image grid.
 
     [ctb_gallery brand="slug" title="Gallery" wrapper_class="..." lightbox="1"]
@@ -44,9 +44,9 @@ Outputs brand gallery as a responsive image grid.
 = PHP Helper Functions =
 All shortcodes are also available as direct PHP functions that bypass WordPress' shortcode parser — useful when Tailwind arbitrary-value classes (e.g. `text-[11px]`) would otherwise be mangled:
 
-    echo ctb_custom_fields(['wrapper_class' => 'grid grid-cols-2 gap-4']);
-    echo ctb_awards(['title' => __('Awards', 'your-textdomain')]);
-    echo ctb_gallery(['title' => __('Gallery', 'your-textdomain'), 'lightbox' => '1']);
+    echo ctbag_custom_fields(['wrapper_class' => 'grid grid-cols-2 gap-4']);
+    echo ctbag_awards(['title' => __('Awards', 'your-textdomain')]);
+    echo ctbag_gallery(['title' => __('Gallery', 'your-textdomain'), 'lightbox' => '1']);
 
 = Professional Admin UI =
 All brand meta fields are presented in a clean, card-based admin interface grouped by module (HTML Description, Custom Fields, Awards, Gallery), with collapsible shortcode reference built in. Custom fields and awards support drag & drop reordering. Gallery images can be removed individually (× button on hover) and reordered by dragging.
@@ -81,6 +81,11 @@ The lightbox uses WooCommerce's bundled PhotoSwipe library. It is only active wh
 
 == Changelog ==
 
+= 2.0.5 =
+* Compliance: renamed all shortcodes and PHP helper functions from `ctb_*` to `ctbag_*` to meet the WordPress.org 5-character prefix requirement (`ctbag` = CartTrigger BAG).
+* Compliance: extracted inline gallery lightbox JavaScript to an external file (`assets/js/ctbag-gallery-lightbox.js`) loaded via `wp_enqueue_script()`.
+* Compatibility: WC tested up to 10.5.3.
+
 = 2.0.4 =
 * New: Gallery — individual image removal with an × button that appears on hover, without reopening the media uploader.
 * New: Gallery — drag & drop reordering of thumbnails (jQuery UI Sortable).
@@ -99,6 +104,9 @@ The lightbox uses WooCommerce's bundled PhotoSwipe library. It is only active wh
 * Plugin fully internationalised — translations available for Italian (it_IT) and Spanish (es_ES).
 
 == Upgrade Notice ==
+
+= 2.0.5 =
+Breaking change: shortcodes and PHP helper functions renamed from `ctb_*` to `ctbag_*`. Update any shortcodes in your content accordingly.
 
 = 2.0.4 =
 New admin UX: drag & drop reordering for gallery, custom fields, and awards; single-image removal in gallery.

@@ -1,5 +1,5 @@
 /* CartTrigger BAG — Admin JS */
-/* global ctbAdmin, wp */
+/* global ctbagAdmin, wp */
 jQuery(function ($) {
     'use strict';
 
@@ -11,10 +11,10 @@ jQuery(function ($) {
     $('#ctb-add-field').on('click', function () {
         var row = '<div class="ctb-field-row">'
             + '<span class="ctb-drag-handle dashicons dashicons-move"></span>'
-            + '<input type="text" name="ctb_custom_fields[' + fieldIndex + '][key]"'
-            + ' placeholder="' + ctbAdmin.labelPlaceholder + '" class="ctb-field-key" />'
-            + '<input type="text" name="ctb_custom_fields[' + fieldIndex + '][value]"'
-            + ' placeholder="' + ctbAdmin.valuePlaceholder + '" class="ctb-field-value" />'
+            + '<input type="text" name="ctbag_custom_fields[' + fieldIndex + '][key]"'
+            + ' placeholder="' + ctbagAdmin.labelPlaceholder + '" class="ctb-field-key" />'
+            + '<input type="text" name="ctbag_custom_fields[' + fieldIndex + '][value]"'
+            + ' placeholder="' + ctbagAdmin.valuePlaceholder + '" class="ctb-field-value" />'
             + '<button type="button" class="ctb-remove-row button-link">&times;</button>'
             + '</div>';
         $('#ctb-custom-fields').append(row);
@@ -36,15 +36,15 @@ jQuery(function ($) {
             + '<span class="ctb-drag-handle dashicons dashicons-move"></span>'
             + '<div class="ctb-award-logo">'
             + '<img class="ctb-logo-preview hidden" src="" alt="" />'
-            + '<input type="hidden" name="ctb_awards[' + awardIndex + '][logo_id]" value="0" />'
+            + '<input type="hidden" name="ctbag_awards[' + awardIndex + '][logo_id]" value="0" />'
             + '<button type="button" class="ctb-upload-logo button button-secondary">Logo</button>'
             + '</div>'
-            + '<input type="text" name="ctb_awards[' + awardIndex + '][name]"'
-            + ' placeholder="' + ctbAdmin.awardNamePlaceholder + '" class="ctb-award-name" />'
-            + '<input type="text" name="ctb_awards[' + awardIndex + '][event]"'
-            + ' placeholder="' + ctbAdmin.awardEventPlaceholder + '" class="ctb-award-event" />'
-            + '<input type="number" name="ctb_awards[' + awardIndex + '][year]"'
-            + ' placeholder="' + ctbAdmin.awardYearPlaceholder + '" class="ctb-award-year" min="1900" max="2100" />'
+            + '<input type="text" name="ctbag_awards[' + awardIndex + '][name]"'
+            + ' placeholder="' + ctbagAdmin.awardNamePlaceholder + '" class="ctb-award-name" />'
+            + '<input type="text" name="ctbag_awards[' + awardIndex + '][event]"'
+            + ' placeholder="' + ctbagAdmin.awardEventPlaceholder + '" class="ctb-award-event" />'
+            + '<input type="number" name="ctbag_awards[' + awardIndex + '][year]"'
+            + ' placeholder="' + ctbagAdmin.awardYearPlaceholder + '" class="ctb-award-year" min="1900" max="2100" />'
             + '<button type="button" class="ctb-remove-row button-link">&times;</button>'
             + '</div>';
         $('#ctb-awards').append(row);
@@ -73,8 +73,8 @@ jQuery(function ($) {
         var $hidden  = $row.find('input[type="hidden"]');
 
         var frame = wp.media({
-            title:    ctbAdmin.mediaTitle,
-            button:   { text: ctbAdmin.mediaButton },
+            title:    ctbagAdmin.mediaTitle,
+            button:   { text: ctbagAdmin.mediaButton },
             multiple: false,
             library:  { type: 'image' }
         });
@@ -99,15 +99,15 @@ jQuery(function ($) {
         }
 
         galleryFrame = wp.media({
-            title:    ctbAdmin.mediaTitle,
-            button:   { text: ctbAdmin.mediaButton },
+            title:    ctbagAdmin.mediaTitle,
+            button:   { text: ctbagAdmin.mediaButton },
             multiple: 'add',
             library:  { type: 'image' }
         });
 
         // Pre-select images already in the gallery
         galleryFrame.on('open', function () {
-            var ids       = $('#ctb_gallery').val().split(',').filter(Boolean);
+            var ids       = $('#ctbag_gallery').val().split(',').filter(Boolean);
             var selection = galleryFrame.state().get('selection');
             ids.forEach(function (id) {
                 var attachment = wp.media.attachment(parseInt(id, 10));
@@ -131,7 +131,7 @@ jQuery(function ($) {
                     + '</div>';
             });
 
-            $('#ctb_gallery').val(ids.join(','));
+            $('#ctbag_gallery').val(ids.join(','));
             $('#ctb-gallery-preview').html(html);
         });
 
@@ -157,7 +157,7 @@ jQuery(function ($) {
         var ids = $('#ctb-gallery-preview .ctb-gallery-thumb').map(function () {
             return $(this).data('id');
         }).get();
-        $('#ctb_gallery').val(ids.join(','));
+        $('#ctbag_gallery').val(ids.join(','));
     }
 
     // ── Hide native description textarea ──────────────────────────────────────
@@ -174,7 +174,7 @@ jQuery(function ($) {
     }
 
     // ── Sync TinyMCE content to textarea before form submit ───────────────────
-    // Needed so ctb_brand_description is included in POST on the add-brand form.
+    // Needed so ctbag_brand_description is included in POST on the add-brand form.
     $('form#addtag').on('submit', function () {
         if (typeof tinyMCE !== 'undefined') {
             tinyMCE.triggerSave();

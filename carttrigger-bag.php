@@ -4,7 +4,7 @@
  * Plugin Name:  CartTrigger – BAG
  * Plugin URI:   https://poletto.es/nuestros-servicios/eficiencia/ct-bag
  * Description:  Enhance WooCommerce with advanced brand management, awards badges, and lifestyle galleries built into native zoom.
- * Version:      2.0.4
+ * Version:      2.0.5
  * Author:       Poletto 1976 S.L.U.
  * Author URI:   https://poletto.es
  * License:      GPLv2 or later
@@ -12,7 +12,7 @@
  * Text Domain:  carttrigger-bag
  * Domain Path:  /languages
  * Requires Plugins: woocommerce
- * WC tested up to: 10.5.2
+ * WC tested up to: 10.5.3
  */
 
 if (! defined('ABSPATH')) {
@@ -26,16 +26,15 @@ add_action('before_woocommerce_init', function () {
     }
 });
 
-define('CTB_VERSION', '2.0.4');
-define('CTB_DIR', plugin_dir_path(__FILE__));
-define('CTB_URL', plugin_dir_url(__FILE__));
+define('CTBAG_VERSION', '2.0.5');
+define('CTBAG_DIR', plugin_dir_path(__FILE__));
+define('CTBAG_URL', plugin_dir_url(__FILE__));
 
-class CTB_CartTrigger_BAG
+class CTBAG_CartTrigger_BAG
 {
     public function __construct()
     {
         // ── 1. Brand Environment (HTML & Security) ────────────────────────────
-        add_action('init', [$this, 'ctb_load_textdomain'], 5);
         add_action('init', [$this, 'ctb_init_brands_environment'], 20);
 
         // ── 2. Admin Assets ───────────────────────────────────────────────────
@@ -46,16 +45,16 @@ class CTB_CartTrigger_BAG
         add_action('product_brand_add_form_fields',  [$this, 'ctb_add_form_fields'],  10, 1);
 
         // ── 4. Save Meta ──────────────────────────────────────────────────────
-        add_action('edited_product_brand',  [$this, 'ctb_save_term_meta'], 10, 2);
-        add_action('created_product_brand', [$this, 'ctb_save_term_meta'], 10, 2);
+        add_action('edited_product_brand',  [$this, 'ctbag_save_term_meta'], 10, 2);
+        add_action('created_product_brand', [$this, 'ctbag_save_term_meta'], 10, 2);
 
         // ── 5. Frontend: Brand Info on Single Product ─────────────────────────
         add_action('woocommerce_single_product_summary', [$this, 'ctb_display_brand_info'], 5);
 
         // ── 6. Frontend: Shortcodes ───────────────────────────────────────────
-        add_shortcode('ctb_awards',        [$this, 'ctb_awards_shortcode']);
-        add_shortcode('ctb_custom_fields', [$this, 'ctb_custom_fields_shortcode']);
-        add_shortcode('ctb_gallery',       [$this, 'ctb_gallery_shortcode']);
+        add_shortcode('ctbag_awards',        [$this, 'ctb_awards_shortcode']);
+        add_shortcode('ctbag_custom_fields', [$this, 'ctb_custom_fields_shortcode']);
+        add_shortcode('ctbag_gallery',       [$this, 'ctb_gallery_shortcode']);
 
         // ── 7. Frontend: Public Assets ───────────────────────────────────────
         add_action('wp_enqueue_scripts', [$this, 'ctb_enqueue_assets'], 20);
@@ -65,13 +64,8 @@ class CTB_CartTrigger_BAG
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
-    // 1. TEXTDOMAIN + BRAND ENVIRONMENT
+    // 1. BRAND ENVIRONMENT
     // ═══════════════════════════════════════════════════════════════════════════
-
-    public function ctb_load_textdomain()
-    {
-        load_plugin_textdomain('carttrigger-bag', false, dirname(plugin_basename(__FILE__)) . '/languages');
-    }
 
     public function ctb_init_brands_environment()
     {
@@ -100,21 +94,21 @@ class CTB_CartTrigger_BAG
         wp_enqueue_media();
 
         wp_enqueue_style(
-            'ctb-admin',
-            CTB_URL . 'assets/css/ctb-admin.css',
+            'ctbag-admin',
+            CTBAG_URL . 'assets/css/ctb-admin.css',
             [],
-            CTB_VERSION
+            CTBAG_VERSION
         );
 
         wp_enqueue_script(
-            'ctb-admin',
-            CTB_URL . 'assets/js/ctb-admin.js',
+            'ctbag-admin',
+            CTBAG_URL . 'assets/js/ctb-admin.js',
             ['jquery', 'wp-util', 'jquery-ui-sortable'],
-            CTB_VERSION,
+            CTBAG_VERSION,
             true
         );
 
-        wp_localize_script('ctb-admin', 'ctbAdmin', [
+        wp_localize_script('ctbag-admin', 'ctbagAdmin', [
             'mediaTitle'          => __('Select image', 'carttrigger-bag'),
             'mediaButton'         => __('Use image', 'carttrigger-bag'),
             'labelPlaceholder'    => __('Label', 'carttrigger-bag'),
@@ -142,11 +136,11 @@ class CTB_CartTrigger_BAG
         <!-- ── Plugin Banner ────────────────────────────────────────────────── -->
         <tr class="ctb-banner-row">
             <td colspan="2">
-                <?php wp_nonce_field('ctb_save_term_meta', 'ctb_nonce'); ?>
+                <?php wp_nonce_field('ctbag_save_term_meta', 'ctbag_nonce'); ?>
                 <div class="ctb-plugin-banner">
                     <div class="ctb-plugin-header">
                         <strong class="ctb-plugin-name">CartTrigger – BAG</strong>
-                        <span class="ctb-plugin-version">v<?= CTB_VERSION ?></span>
+                        <span class="ctb-plugin-version">v<?php echo esc_html( CTBAG_VERSION ); ?></span>
                     </div>
                     <p class="ctb-plugin-tagline">Brand · Awards · Gallery for WooCommerce</p>
                 </div>
@@ -166,9 +160,9 @@ class CTB_CartTrigger_BAG
                         $description_raw = get_term_field('description', $term->term_id, 'product_brand', 'raw');
                         wp_editor(
                             html_entity_decode((string) $description_raw, ENT_QUOTES, 'UTF-8'),
-                            'ctb_brand_description',
+                            'ctbag_brand_description',
                             [
-                                'textarea_name' => 'ctb_brand_description',
+                                'textarea_name' => 'ctbag_brand_description',
                                 'textarea_rows' => 12,
                                 'media_buttons' => true,
                                 'teeny'         => false,
@@ -194,13 +188,13 @@ class CTB_CartTrigger_BAG
                                 <div class="ctb-field-row">
                                     <span class="ctb-drag-handle dashicons dashicons-move"></span>
                                     <input type="text"
-                                        name="ctb_custom_fields[<?= (int) $i ?>][key]"
-                                        value="<?= esc_attr($field['key']) ?>"
+                                        name="ctbag_custom_fields[<?php echo (int) $i ?>][key]"
+                                        value="<?php echo esc_attr($field['key']) ?>"
                                         placeholder="<?php esc_attr_e('Label', 'carttrigger-bag'); ?>"
                                         class="ctb-field-key" />
                                     <input type="text"
-                                        name="ctb_custom_fields[<?= (int) $i ?>][value]"
-                                        value="<?= esc_attr($field['value']) ?>"
+                                        name="ctbag_custom_fields[<?php echo (int) $i ?>][value]"
+                                        value="<?php echo esc_attr($field['value']) ?>"
                                         placeholder="<?php esc_attr_e('Value', 'carttrigger-bag'); ?>"
                                         class="ctb-field-value" />
                                     <button type="button" class="ctb-remove-row button-link">&times;</button>
@@ -259,29 +253,29 @@ class CTB_CartTrigger_BAG
                                 <div class="ctb-award-row">
                                     <span class="ctb-drag-handle dashicons dashicons-move"></span>
                                     <div class="ctb-award-logo">
-                                        <img src="<?= esc_url((string) $logo_url) ?>"
-                                            class="ctb-logo-preview<?= $logo_url ? '' : ' hidden' ?>"
+                                        <img src="<?php echo esc_url((string) $logo_url) ?>"
+                                            class="ctb-logo-preview<?php echo $logo_url ? '' : ' hidden' ?>"
                                             alt="" />
                                         <input type="hidden"
-                                            name="ctb_awards[<?= (int) $i ?>][logo_id]"
-                                            value="<?= (int) $award['logo_id'] ?>" />
+                                            name="ctbag_awards[<?php echo (int) $i ?>][logo_id]"
+                                            value="<?php echo (int) $award['logo_id'] ?>" />
                                         <button type="button" class="ctb-upload-logo button button-secondary">
                                             <?php esc_html_e('Logo', 'carttrigger-bag'); ?>
                                         </button>
                                     </div>
                                     <input type="text"
-                                        name="ctb_awards[<?= (int) $i ?>][name]"
-                                        value="<?= esc_attr($award['name']) ?>"
+                                        name="ctbag_awards[<?php echo (int) $i ?>][name]"
+                                        value="<?php echo esc_attr($award['name']) ?>"
                                         placeholder="<?php esc_attr_e('Award name', 'carttrigger-bag'); ?>"
                                         class="ctb-award-name" />
                                     <input type="text"
-                                        name="ctb_awards[<?= (int) $i ?>][event]"
-                                        value="<?= esc_attr($award['event'] ?? '') ?>"
+                                        name="ctbag_awards[<?php echo (int) $i ?>][event]"
+                                        value="<?php echo esc_attr($award['event'] ?? '') ?>"
                                         placeholder="<?php esc_attr_e('Event (e.g. Vinum Extra 2024)', 'carttrigger-bag'); ?>"
                                         class="ctb-award-event" />
                                     <input type="number"
-                                        name="ctb_awards[<?= (int) $i ?>][year]"
-                                        value="<?= esc_attr($award['year']) ?>"
+                                        name="ctbag_awards[<?php echo (int) $i ?>][year]"
+                                        value="<?php echo esc_attr($award['year']) ?>"
                                         placeholder="<?php esc_attr_e('Year', 'carttrigger-bag'); ?>"
                                         class="ctb-award-year"
                                         min="1900" max="2100" />
@@ -350,8 +344,8 @@ class CTB_CartTrigger_BAG
                         <?php esc_html_e('Gallery', 'carttrigger-bag'); ?>
                     </h3>
                     <div class="ctb-module-body">
-                        <input type="hidden" id="ctb_gallery" name="ctb_gallery"
-                            value="<?= esc_attr($gallery_ids) ?>" />
+                        <input type="hidden" id="ctb_gallery" name="ctbag_gallery"
+                            value="<?php echo esc_attr($gallery_ids) ?>" />
                         <div id="ctb-gallery-preview" class="ctb-gallery-thumbnails">
                             <?php
                             if ($gallery_ids) {
@@ -434,10 +428,10 @@ class CTB_CartTrigger_BAG
 
         <!-- ── Plugin Banner ────────────────────────────────────────────────── -->
         <div class="ctb-plugin-banner" style="margin:8px 0 16px;">
-            <?php wp_nonce_field('ctb_save_term_meta', 'ctb_nonce'); ?>
+            <?php wp_nonce_field('ctbag_save_term_meta', 'ctbag_nonce'); ?>
             <div class="ctb-plugin-header">
                 <strong class="ctb-plugin-name">CartTrigger – BAG</strong>
-                <span class="ctb-plugin-version">v<?= CTB_VERSION ?></span>
+                <span class="ctb-plugin-version">v<?php echo esc_html( CTBAG_VERSION ); ?></span>
             </div>
             <p class="ctb-plugin-tagline">Brand · Awards · Gallery for WooCommerce</p>
         </div>
@@ -453,9 +447,9 @@ class CTB_CartTrigger_BAG
                     <?php
                     wp_editor(
                         '',
-                        'ctb_brand_description',
+                        'ctbag_brand_description',
                         [
-                            'textarea_name' => 'ctb_brand_description',
+                            'textarea_name' => 'ctbag_brand_description',
                             'textarea_rows' => 12,
                             'media_buttons' => true,
                             'teeny'         => false,
@@ -506,7 +500,7 @@ class CTB_CartTrigger_BAG
                     <?php esc_html_e('Gallery', 'carttrigger-bag'); ?>
                 </h3>
                 <div class="ctb-module-body">
-                    <input type="hidden" id="ctb_gallery" name="ctb_gallery" value="" />
+                    <input type="hidden" id="ctb_gallery" name="ctbag_gallery" value="" />
                     <div id="ctb-gallery-preview" class="ctb-gallery-thumbnails"></div>
                     <button type="button" id="ctb-manage-gallery" class="button button-secondary">
                         <?php esc_html_e('Manage gallery', 'carttrigger-bag'); ?>
@@ -531,7 +525,7 @@ class CTB_CartTrigger_BAG
             return;
         }
 
-        if (! isset($_POST['ctb_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['ctb_nonce'])), 'ctb_save_term_meta')) {
+        if (! isset($_POST['ctbag_nonce']) || ! wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['ctbag_nonce'])), 'ctbag_save_term_meta')) {
             return;
         }
         if (! current_user_can('manage_categories')) {
@@ -539,8 +533,8 @@ class CTB_CartTrigger_BAG
         }
 
         // ── Description via TinyMCE ───────────────────────────────────────────
-        if (isset($_POST['ctb_brand_description'])) {
-            $description = wp_kses_post(wp_unslash($_POST['ctb_brand_description']));
+        if (isset($_POST['ctbag_brand_description'])) {
+            $description = wp_kses_post(wp_unslash($_POST['ctbag_brand_description']));
             $is_saving   = true;
             wp_update_term((int) $term_id, 'product_brand', ['description' => $description]);
             $is_saving   = false;
@@ -550,7 +544,7 @@ class CTB_CartTrigger_BAG
         // wp_strip_all_tags() is used instead of sanitize_text_field() because
         // sanitize_text_field() calls wp_check_invalid_utf8() which on some server
         // configurations returns '' for valid accented characters / typographic quotes.
-        $raw_fields = isset($_POST['ctb_custom_fields']) ? (array) $_POST['ctb_custom_fields'] : [];
+        $raw_fields = isset($_POST['ctbag_custom_fields']) ? (array) wp_unslash( $_POST['ctbag_custom_fields'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- each element is sanitized via wp_strip_all_tags() inside the foreach loop below
         $fields     = [];
         foreach ($raw_fields as $field) {
             $key   = trim(wp_strip_all_tags(wp_unslash($field['key']   ?? '')));
@@ -562,10 +556,10 @@ class CTB_CartTrigger_BAG
         // Store as a PHP array: WordPress uses maybe_serialize() which calls
         // serialize() — no backslash escaping at all, immune to wp_unslash()
         // stripping backslashes inside JSON strings (which broke double-quote chars).
-        update_term_meta((int) $term_id, 'ctb_custom_fields', $fields);
+        update_term_meta((int) $term_id, 'ctbag_custom_fields', $fields);
 
         // ── Awards ────────────────────────────────────────────────────────────
-        $raw_awards = isset($_POST['ctb_awards']) ? (array) $_POST['ctb_awards'] : [];
+        $raw_awards = isset($_POST['ctbag_awards']) ? (array) wp_unslash( $_POST['ctbag_awards'] ) : []; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- each element is sanitized via wp_strip_all_tags()/sanitize_text_field() inside the foreach loop below
         $awards     = [];
         foreach ($raw_awards as $award) {
             $logo_id = (int) ($award['logo_id'] ?? 0);
@@ -576,12 +570,12 @@ class CTB_CartTrigger_BAG
                 $awards[] = ['logo_id' => $logo_id, 'name' => $name, 'event' => $event, 'year' => $year];
             }
         }
-        update_term_meta((int) $term_id, 'ctb_awards', $awards);
+        update_term_meta((int) $term_id, 'ctbag_awards', $awards);
 
         // ── Gallery ───────────────────────────────────────────────────────────
-        $gallery_raw = isset($_POST['ctb_gallery']) ? sanitize_text_field(wp_unslash($_POST['ctb_gallery'])) : '';
+        $gallery_raw = isset($_POST['ctbag_gallery']) ? sanitize_text_field(wp_unslash($_POST['ctbag_gallery'])) : '';
         $gallery_ids = implode(',', array_filter(array_map('intval', explode(',', $gallery_raw))));
-        update_term_meta((int) $term_id, 'ctb_gallery', $gallery_ids);
+        update_term_meta((int) $term_id, 'ctbag_gallery', $gallery_ids);
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -640,7 +634,7 @@ class CTB_CartTrigger_BAG
                 'year_class'   => 'font-mono-accent text-xs text-blu-800/40 block mt-1',
             ],
             $atts,
-            'ctb_awards'
+            'ctbag_awards'
         );
         $atts = $this->ctb_decode_classes($atts);
 
@@ -657,29 +651,29 @@ class CTB_CartTrigger_BAG
         ob_start();
     ?>
         <?php if ($atts['title'] !== '') : ?>
-            <span class="<?= esc_attr($atts['title_class']) ?>"><?= esc_html($atts['title']) ?></span>
+            <span class="<?php echo esc_attr($atts['title_class']) ?>"><?php echo esc_html($atts['title']) ?></span>
         <?php endif; ?>
         <?php if ($atts['line_class'] !== '') : ?>
-            <div class="<?= esc_attr($atts['line_class']) ?>"></div>
+            <div class="<?php echo esc_attr($atts['line_class']) ?>"></div>
         <?php endif; ?>
-        <div class="<?= esc_attr($atts['wrapper_class']) ?>">
+        <div class="<?php echo esc_attr($atts['wrapper_class']) ?>">
             <?php foreach ($awards as $award) :
                 $logo_url = ! empty($award['logo_id']) ? wp_get_attachment_image_url((int) $award['logo_id'], 'medium') : '';
             ?>
-                <div class="<?= esc_attr($atts['card_class']) ?>">
+                <div class="<?php echo esc_attr($atts['card_class']) ?>">
                     <?php if ($logo_url) : ?>
-                        <img src="<?= esc_url($logo_url) ?>"
-                            alt="<?= esc_attr($award['name']) ?>"
-                            class="<?= esc_attr($atts['img_class']) ?>"
+                        <img src="<?php echo esc_url($logo_url) ?>"
+                            alt="<?php echo esc_attr($award['name']) ?>"
+                            class="<?php echo esc_attr($atts['img_class']) ?>"
                             loading="lazy" />
                     <?php endif; ?>
                     <div class="flex flex-col items-center">
-                        <span class="<?= esc_attr($atts['name_class']) ?>"><?= esc_html($award['name']) ?></span>
+                        <span class="<?php echo esc_attr($atts['name_class']) ?>"><?php echo esc_html($award['name']) ?></span>
                         <?php if (! empty($award['event'])) : ?>
-                            <span class="<?= esc_attr($atts['event_class']) ?> block"><?= esc_html($award['event']) ?></span>
+                            <span class="<?php echo esc_attr($atts['event_class']) ?> block"><?php echo esc_html($award['event']) ?></span>
                         <?php endif; ?>
                         <?php if (! empty($award['year'])) : ?>
-                            <span class="<?= esc_attr($atts['year_class']) ?>"><?= esc_html($award['year']) ?></span>
+                            <span class="<?php echo esc_attr($atts['year_class']) ?>"><?php echo esc_html($award['year']) ?></span>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -708,7 +702,7 @@ class CTB_CartTrigger_BAG
                 'dd_class'      => 'font-inter text-sm text-blu-900',
             ],
             $atts,
-            'ctb_custom_fields'
+            'ctbag_custom_fields'
         );
         $atts = $this->ctb_decode_classes($atts);
 
@@ -724,12 +718,12 @@ class CTB_CartTrigger_BAG
 
         ob_start();
     ?>
-        <dl class="<?= esc_attr($atts['wrapper_class']) ?>">
+        <dl class="<?php echo esc_attr($atts['wrapper_class']) ?>">
             <?php foreach ($fields as $cf) :
                 if (empty($cf['key'])) continue; ?>
                 <div>
-                    <dt class="<?= esc_attr($atts['dt_class']) ?>"><?= esc_html($cf['key']) ?></dt>
-                    <dd class="<?= esc_attr($atts['dd_class']) ?>"><?= esc_html($cf['value']) ?></dd>
+                    <dt class="<?php echo esc_attr($atts['dt_class']) ?>"><?php echo esc_html($cf['key']) ?></dt>
+                    <dd class="<?php echo esc_attr($atts['dd_class']) ?>"><?php echo esc_html($cf['value']) ?></dd>
                 </div>
             <?php endforeach; ?>
         </dl>
@@ -762,7 +756,7 @@ class CTB_CartTrigger_BAG
                 'lightbox'      => '',  // '1' | 'wc'  → use WooCommerce PhotoSwipe lightbox
             ],
             $atts,
-            'ctb_gallery'
+            'ctbag_gallery'
         );
         $atts = $this->ctb_decode_classes($atts);
 
@@ -791,12 +785,12 @@ class CTB_CartTrigger_BAG
         ob_start();
     ?>
         <?php if ($atts['title'] !== '') : ?>
-            <span class="<?= esc_attr($atts['title_class']) ?>"><?= esc_html($atts['title']) ?></span>
+            <span class="<?php echo esc_attr($atts['title_class']) ?>"><?php echo esc_html($atts['title']) ?></span>
         <?php endif; ?>
         <?php if ($atts['line_class'] !== '') : ?>
-            <div class="<?= esc_attr($atts['line_class']) ?>"></div>
+            <div class="<?php echo esc_attr($atts['line_class']) ?>"></div>
         <?php endif; ?>
-        <div class="<?= esc_attr($wrapper_class) ?>">
+        <div class="<?php echo esc_attr($wrapper_class) ?>">
             <?php foreach ($ids as $img_id) :
                 $full_src  = wp_get_attachment_image_src($img_id, $atts['size_full']);
                 if (! $full_src) continue;
@@ -805,22 +799,22 @@ class CTB_CartTrigger_BAG
                 $alt       = get_post_meta($img_id, '_wp_attachment_image_alt', true) ?: '';
             ?>
                 <?php if ($use_lb) : ?>
-                <a href="<?= esc_url($full_url) ?>"
-                    class="<?= esc_attr($atts['item_class']) ?>"
+                <a href="<?php echo esc_url($full_url) ?>"
+                    class="<?php echo esc_attr($atts['item_class']) ?>"
                     target="_blank"
                     rel="noopener"
-                    data-ctb-lb-src="<?= esc_url($full_url) ?>"
-                    data-ctb-lb-w="<?= (int) $full_w ?>"
-                    data-ctb-lb-h="<?= (int) $full_h ?>">
+                    data-ctb-lb-src="<?php echo esc_url($full_url) ?>"
+                    data-ctb-lb-w="<?php echo (int) $full_w ?>"
+                    data-ctb-lb-h="<?php echo (int) $full_h ?>">
                 <?php else : ?>
-                <a href="<?= esc_url($full_url) ?>"
-                    class="<?= esc_attr($atts['item_class']) ?>"
+                <a href="<?php echo esc_url($full_url) ?>"
+                    class="<?php echo esc_attr($atts['item_class']) ?>"
                     target="_blank"
                     rel="noopener">
                 <?php endif; ?>
-                    <img src="<?= esc_url($thumb_url) ?>"
-                        alt="<?= esc_attr($alt) ?>"
-                        class="<?= esc_attr($atts['img_class']) ?>"
+                    <img src="<?php echo esc_url($thumb_url) ?>"
+                        alt="<?php echo esc_attr($alt) ?>"
+                        class="<?php echo esc_attr($atts['img_class']) ?>"
                         loading="lazy" />
                 </a>
             <?php endforeach; ?>
@@ -900,9 +894,13 @@ class CTB_CartTrigger_BAG
         }
         $done = true;
 
-        // Scripts are already enqueued by ctb_enqueue_assets() during wp_enqueue_scripts.
-        // Here we only register the footer callback that outputs the .pswp container
-        // and the gallery init script.
+        wp_enqueue_script(
+            'ctbag-gallery-lightbox',
+            CTBAG_URL . 'assets/js/ctbag-gallery-lightbox.js',
+            ['wc-photoswipe', 'wc-photoswipe-ui-default'],
+            CTBAG_VERSION,
+            true
+        );
         add_action('wp_footer', [$this, 'ctb_gallery_lightbox_footer'], 20);
     }
 
@@ -941,64 +939,6 @@ class CTB_CartTrigger_BAG
 </div>
 <?php
         endif;
-?>
-<script>
-(function () {
-    'use strict';
-
-    function ctbInitLightbox() {
-        var galleries = document.querySelectorAll('.ctb-gallery--lb');
-        if (!galleries.length) return;
-
-        if (typeof PhotoSwipe === 'undefined' || typeof PhotoSwipeUI_Default === 'undefined') {
-            console.warn(
-                '[CTB Gallery] Lightbox no disponible: los scripts de WooCommerce (PhotoSwipe) ' +
-                'no están cargados en esta página. ' +
-                'Asegúrate de que los scripts de WooCommerce estén habilitados en esta página ' +
-                'o elimina el atributo lightbox="1" del shortcode. ' +
-                'Las imágenes se abrirán en nueva pestaña como fallback.'
-            );
-            return;
-        }
-
-        var pswpEl = document.querySelector('.pswp');
-        if (!pswpEl) return;
-
-        galleries.forEach(function (gallery) {
-            var links = gallery.querySelectorAll('a[data-ctb-lb-src]');
-            var items = Array.from(links).map(function (a) {
-                return {
-                    src: a.dataset.ctbLbSrc,
-                    w:   parseInt(a.dataset.ctbLbW, 10) || 0,
-                    h:   parseInt(a.dataset.ctbLbH, 10) || 0,
-                };
-            });
-            links.forEach(function (a, i) {
-                a.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    var ps = new PhotoSwipe(pswpEl, PhotoSwipeUI_Default, items, {
-                        index:           i,
-                        bgOpacity:       0.9,
-                        showHideOpacity: true,
-                        history:         false,
-                    });
-                    ps.init();
-                });
-            });
-        });
-    }
-
-    // wc-photoswipe uses strategy:'defer' — deferred scripts execute before
-    // DOMContentLoaded but after synchronous inline scripts like this one.
-    // Waiting for DOMContentLoaded guarantees PhotoSwipe globals are defined.
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', ctbInitLightbox);
-    } else {
-        ctbInitLightbox();
-    }
-}());
-</script>
-<?php
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -1049,7 +989,7 @@ class CTB_CartTrigger_BAG
 
     private function ctb_get_custom_fields($term_id)
     {
-        $raw = get_term_meta((int) $term_id, 'ctb_custom_fields', true);
+        $raw = get_term_meta((int) $term_id, 'ctbag_custom_fields', true);
         // New format: PHP array (stored via maybe_serialize).
         // Legacy format: JSON string (stored by earlier versions).
         if (is_array($raw)) {
@@ -1061,7 +1001,7 @@ class CTB_CartTrigger_BAG
 
     private function ctb_get_awards($term_id)
     {
-        $raw = get_term_meta((int) $term_id, 'ctb_awards', true);
+        $raw = get_term_meta((int) $term_id, 'ctbag_awards', true);
         // New format: PHP array (stored via maybe_serialize).
         // Legacy format: JSON string (stored by earlier versions).
         if (is_array($raw)) {
@@ -1073,7 +1013,7 @@ class CTB_CartTrigger_BAG
 
     private function ctb_get_gallery_ids($term_id)
     {
-        return get_term_meta((int) $term_id, 'ctb_gallery', true) ?: '';
+        return get_term_meta((int) $term_id, 'ctbag_gallery', true) ?: '';
     }
 
     // ═══════════════════════════════════════════════════════════════════════════
@@ -1082,15 +1022,15 @@ class CTB_CartTrigger_BAG
 
     public function ctb_activation_notice()
     {
-        if (! get_transient('ctb_activated')) {
+        if (! get_transient('ctbag_activated')) {
             return;
         }
-        delete_transient('ctb_activated');
+        delete_transient('ctbag_activated');
 
         $url = admin_url('edit-tags.php?taxonomy=product_brand&post_type=product');
         printf(
             '<div class="notice notice-success is-dismissible"><p><strong>CartTrigger – BAG %s</strong> %s <a href="%s">%s &rarr;</a></p></div>',
-            esc_html(CTB_VERSION),
+            esc_html(CTBAG_VERSION),
             esc_html__('activated successfully.', 'carttrigger-bag'),
             esc_url($url),
             esc_html__('Manage brands', 'carttrigger-bag')
@@ -1100,12 +1040,12 @@ class CTB_CartTrigger_BAG
 
 // On activation: set a transient so the admin notice fires once on next load.
 register_activation_hook(__FILE__, function () {
-    set_transient('ctb_activated', 1, 30);
+    set_transient('ctbag_activated', 1, 30);
 });
 
 // Initialise the plugin and store instance for direct PHP template access.
-global $ctb_bag;
-$ctb_bag = new CTB_CartTrigger_BAG();
+global $ctbag_bag;
+$ctbag_bag = new CTBAG_CartTrigger_BAG();
 
 /**
  * PHP helper functions for use in theme templates.
@@ -1118,17 +1058,17 @@ $ctb_bag = new CTB_CartTrigger_BAG();
  *   echo ctb_custom_fields(['wrapper_class' => 'flex gap-4']);
  *   echo ctb_gallery(['title' => __('Gallery','my-theme')]);
  */
-function ctb_awards( array $atts = [] ): string {
-    global $ctb_bag;
-    return $ctb_bag ? $ctb_bag->ctb_awards_shortcode( $atts ) : '';
+function ctbag_awards( array $atts = [] ): string {
+    global $ctbag_bag;
+    return $ctbag_bag ? $ctbag_bag->ctb_awards_shortcode( $atts ) : '';
 }
 
-function ctb_custom_fields( array $atts = [] ): string {
-    global $ctb_bag;
-    return $ctb_bag ? $ctb_bag->ctb_custom_fields_shortcode( $atts ) : '';
+function ctbag_custom_fields( array $atts = [] ): string {
+    global $ctbag_bag;
+    return $ctbag_bag ? $ctbag_bag->ctb_custom_fields_shortcode( $atts ) : '';
 }
 
-function ctb_gallery( array $atts = [] ): string {
-    global $ctb_bag;
-    return $ctb_bag ? $ctb_bag->ctb_gallery_shortcode( $atts ) : '';
+function ctbag_gallery( array $atts = [] ): string {
+    global $ctbag_bag;
+    return $ctbag_bag ? $ctbag_bag->ctb_gallery_shortcode( $atts ) : '';
 }
