@@ -5,7 +5,7 @@ Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
 Requires Plugins: woocommerce
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,6 +80,10 @@ The lightbox uses WooCommerce's bundled PhotoSwipe library. It is only active wh
 5. Frontend gallery with WooCommerce lightbox active.
 
 == Changelog ==
+
+= 2.0.6 =
+* Fix: fatal error on brand save due to mismatched method name after 2.0.5 prefix rename (`ctbag_save_term_meta`).
+* Fix: added one-time migration to move existing term meta from legacy `ctb_*` keys to `ctbag_*` keys.
 
 = 2.0.5 =
 * Compliance: renamed all shortcodes and PHP helper functions from `ctb_*` to `ctbag_*` to meet the WordPress.org 5-character prefix requirement (`ctbag` = CartTrigger BAG).

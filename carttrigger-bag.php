@@ -4,7 +4,7 @@
  * Plugin Name:  CartTrigger – BAG
  * Plugin URI:   https://poletto.es/nuestros-servicios/eficiencia/ct-bag
  * Description:  Enhance WooCommerce with advanced brand management, awards badges, and lifestyle galleries built into native zoom.
- * Version:      2.0.5
+ * Version:      2.0.6
  * Author:       Poletto 1976 S.L.U.
  * Author URI:   https://poletto.es
  * License:      GPLv2 or later
@@ -26,7 +26,7 @@ add_action('before_woocommerce_init', function () {
     }
 });
 
-define('CTBAG_VERSION', '2.0.5');
+define('CTBAG_VERSION', '2.0.6');
 define('CTBAG_DIR', plugin_dir_path(__FILE__));
 define('CTBAG_URL', plugin_dir_url(__FILE__));
 
@@ -516,7 +516,7 @@ class CTBAG_CartTrigger_BAG
     // 4. SAVE META
     // ═══════════════════════════════════════════════════════════════════════════
 
-    public function ctb_save_term_meta($term_id, $tt_id)
+    public function ctbag_save_term_meta($term_id, $tt_id)
     {
         // Guard against infinite loop: saving the description via wp_update_term()
         // re-fires edited_product_brand, which would call this function again.
@@ -1042,6 +1042,41 @@ class CTBAG_CartTrigger_BAG
 register_activation_hook(__FILE__, function () {
     set_transient('ctbag_activated', 1, 30);
 });
+
+/**
+ * One-time migration: move term meta from legacy ctb_* keys to ctbag_* keys.
+ * Runs once per site; skipped if already done (ctbag_meta_migrated option set).
+ */
+function ctbag_migrate_meta_keys() {
+    if ( get_option( 'ctbag_meta_migrated' ) ) {
+        return;
+    }
+
+    $terms = get_terms( [ 'taxonomy' => 'product_brand', 'hide_empty' => false ] );
+    if ( is_wp_error( $terms ) || empty( $terms ) ) {
+        update_option( 'ctbag_meta_migrated', 1 );
+        return;
+    }
+
+    $map = [
+        'ctb_custom_fields' => 'ctbag_custom_fields',
+        'ctb_awards'        => 'ctbag_awards',
+        'ctb_gallery'       => 'ctbag_gallery',
+    ];
+
+    foreach ( $terms as $term ) {
+        foreach ( $map as $old_key => $new_key ) {
+            $value = get_term_meta( $term->term_id, $old_key, true );
+            if ( $value !== '' && $value !== false ) {
+                update_term_meta( $term->term_id, $new_key, $value );
+                delete_term_meta( $term->term_id, $old_key );
+            }
+        }
+    }
+
+    update_option( 'ctbag_meta_migrated', 1 );
+}
+add_action( 'init', 'ctbag_migrate_meta_keys' );
 
 // Initialise the plugin and store instance for direct PHP template access.
 global $ctbag_bag;
