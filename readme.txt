@@ -2,7 +2,7 @@
 Contributors: poletto1976
 Tags: woocommerce, brands, awards, gallery, brand management
 Requires at least: 6.3
-Tested up to: 6.9
+Tested up to: 6.9.3
 Requires PHP: 7.4
 Requires Plugins: woocommerce
 Stable tag: 2.0.6
@@ -88,7 +88,7 @@ The lightbox uses WooCommerce's bundled PhotoSwipe library. It is only active wh
 = 2.0.5 =
 * Compliance: renamed all shortcodes and PHP helper functions from `ctb_*` to `ctbag_*` to meet the WordPress.org 5-character prefix requirement (`ctbag` = CartTrigger BAG).
 * Compliance: extracted inline gallery lightbox JavaScript to an external file (`assets/js/ctbag-gallery-lightbox.js`) loaded via `wp_enqueue_script()`.
-* Compatibility: WC tested up to 10.5.3.
+* Compatibility: WC tested up to 10.6.0.
 
 = 2.0.4 =
 * New: Gallery — individual image removal with an × button that appears on hover, without reopening the media uploader.
