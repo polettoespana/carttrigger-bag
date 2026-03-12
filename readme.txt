@@ -29,17 +29,17 @@ Upload a curated image gallery per brand. Display it as a responsive grid with t
 **`[ctbag_custom_fields]`**
 Outputs brand custom fields as a `<dl>` list.
 
-    [ctb_custom_fields brand="slug" wrapper_class="..." dt_class="..." dd_class="..."]
+    [ctbag_custom_fields brand="slug" wrapper_class="..." dt_class="..." dd_class="..."]
 
 **`[ctbag_awards]`**
 Outputs brand awards as a styled card list.
 
-    [ctb_awards brand="slug" title="Awards" wrapper_class="..." card_class="..."]
+    [ctbag_awards brand="slug" title="Awards" wrapper_class="..." card_class="..."]
 
 **`[ctbag_gallery]`**
 Outputs brand gallery as a responsive image grid.
 
-    [ctb_gallery brand="slug" title="Gallery" wrapper_class="..." lightbox="1"]
+    [ctbag_gallery brand="slug" title="Gallery" wrapper_class="..." lightbox="1"]
 
 = PHP Helper Functions =
 All shortcodes are also available as direct PHP functions that bypass WordPress' shortcode parser — useful when Tailwind arbitrary-value classes (e.g. `text-[11px]`) would otherwise be mangled:
@@ -70,6 +70,22 @@ Yes, but classes containing square brackets (e.g. `text-[11px]`) will be interpr
 
 = Where is the gallery lightbox loaded? =
 The lightbox uses WooCommerce's bundled PhotoSwipe library. It is only active when `lightbox="1"` is set. On pages where WooCommerce scripts are disabled, a graceful fallback (open image in new tab) is used automatically.
+
+= Gallery images look blurry or load slowly — what image size should I use? =
+The `size_thumb` parameter controls which registered WordPress image size is used for gallery thumbnails. The default is `medium_large` (typically 768 px wide), which is appropriate for large single-column layouts. If your gallery is displayed in a multi-column grid (3–4 columns), use `size_thumb="medium"` (300 px) to reduce file weight by 4–6× with no visible quality loss:
+
+    [ctbag_gallery size_thumb="medium" lightbox="1"]
+
+Or via PHP helper:
+
+    echo ctbag_gallery(['size_thumb' => 'medium', 'lightbox' => '1']);
+
+= Brand pages load slowly — any caching recommendations? =
+Brand taxonomy pages contain no user-specific content (no cart, no session), so they are ideal candidates for full-page caching. Make sure your caching plugin (LiteSpeed Cache, WP Rocket, W3 Total Cache…) does **not** exclude brand taxonomy pages from its cache.
+
+Since version 2.0.8, PhotoSwipe (4 CSS/JS files) is only enqueued on brand pages that actually have a gallery, so brands without a gallery already load significantly fewer assets.
+
+If you use LiteSpeed Cache and notice that brand pages are slow after a product update, check whether "Smart Purge on Product Update" is purging brand taxonomy pages. Enabling the LiteSpeed Crawler ensures the cache is regenerated automatically in the background so visitors never hit an uncached page.
 
 == Screenshots ==
 
