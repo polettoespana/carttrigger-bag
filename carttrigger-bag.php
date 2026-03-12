@@ -4,7 +4,7 @@
  * Plugin Name:  CartTrigger – BAG
  * Plugin URI:   https://poletto.es/nuestros-servicios/eficiencia/ct-bag
  * Description:  Enhance WooCommerce with advanced brand management, awards badges, and lifestyle galleries built into native zoom.
- * Version:      2.0.7
+ * Version:      2.0.8
  * Author:       Poletto 1976 S.L.U.
  * Author URI:   https://poletto.es
  * License:      GPLv2 or later
@@ -26,7 +26,7 @@ add_action('before_woocommerce_init', function () {
     }
 });
 
-define('CTBAG_VERSION', '2.0.7');
+define('CTBAG_VERSION', '2.0.8');
 define('CTBAG_DIR', plugin_dir_path(__FILE__));
 define('CTBAG_URL', plugin_dir_url(__FILE__));
 
@@ -871,15 +871,18 @@ class CTBAG_CartTrigger_BAG
             );
         }
 
-        // Enqueue CSS and JS so they land in <head>/<footer> via the normal
-        // wp_enqueue_scripts pipeline — before wp_head() fires.
-        // JS must be enqueued here (not from within the shortcode) because WC only
-        // loads wc-photoswipe-ui-default on is_product() pages; brand taxonomy pages
-        // never get it otherwise.
-        wp_enqueue_style('photoswipe');
-        wp_enqueue_style('photoswipe-default-skin');
-        wp_enqueue_script('wc-photoswipe');
-        wp_enqueue_script('wc-photoswipe-ui-default');
+        // Enqueue PhotoSwipe CSS/JS only on brand taxonomy pages that actually have
+        // a gallery with lightbox. Assets are registered above so shortcode output
+        // on other contexts can still enqueue them lazily if needed.
+        if (is_tax('product_brand')) {
+            $term = get_queried_object();
+            if ($term && ! is_wp_error($term) && get_term_meta($term->term_id, 'ctbag_gallery', true)) {
+                wp_enqueue_style('photoswipe');
+                wp_enqueue_style('photoswipe-default-skin');
+                wp_enqueue_script('wc-photoswipe');
+                wp_enqueue_script('wc-photoswipe-ui-default');
+            }
+        }
     }
 
     /**
