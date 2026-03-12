@@ -4,7 +4,7 @@
  * Plugin Name:  CartTrigger – BAG
  * Plugin URI:   https://poletto.es/nuestros-servicios/eficiencia/ct-bag
  * Description:  Enhance WooCommerce with advanced brand management, awards badges, and lifestyle galleries built into native zoom.
- * Version:      2.0.6
+ * Version:      2.0.7
  * Author:       Poletto 1976 S.L.U.
  * Author URI:   https://poletto.es
  * License:      GPLv2 or later
@@ -26,7 +26,7 @@ add_action('before_woocommerce_init', function () {
     }
 });
 
-define('CTBAG_VERSION', '2.0.6');
+define('CTBAG_VERSION', '2.0.7');
 define('CTBAG_DIR', plugin_dir_path(__FILE__));
 define('CTBAG_URL', plugin_dir_url(__FILE__));
 
@@ -344,7 +344,7 @@ class CTBAG_CartTrigger_BAG
                         <?php esc_html_e('Gallery', 'carttrigger-bag'); ?>
                     </h3>
                     <div class="ctb-module-body">
-                        <input type="hidden" id="ctb_gallery" name="ctbag_gallery"
+                        <input type="hidden" id="ctbag_gallery" name="ctbag_gallery"
                             value="<?php echo esc_attr($gallery_ids) ?>" />
                         <div id="ctb-gallery-preview" class="ctb-gallery-thumbnails">
                             <?php
@@ -500,7 +500,7 @@ class CTBAG_CartTrigger_BAG
                     <?php esc_html_e('Gallery', 'carttrigger-bag'); ?>
                 </h3>
                 <div class="ctb-module-body">
-                    <input type="hidden" id="ctb_gallery" name="ctbag_gallery" value="" />
+                    <input type="hidden" id="ctbag_gallery" name="ctbag_gallery" value="" />
                     <div id="ctb-gallery-preview" class="ctb-gallery-thumbnails"></div>
                     <button type="button" id="ctb-manage-gallery" class="button button-secondary">
                         <?php esc_html_e('Manage gallery', 'carttrigger-bag'); ?>
