@@ -4,7 +4,7 @@
  * Plugin Name:  CartTrigger – BAG
  * Plugin URI:   https://poletto.es/nuestros-servicios/eficiencia/ct-bag
  * Description:  Enhance WooCommerce with advanced brand management, awards badges, and lifestyle galleries built into native zoom.
- * Version:      2.0.8
+ * Version:      2.0.9
  * Author:       Poletto 1976 S.L.U.
  * Author URI:   https://poletto.es
  * License:      GPLv2 or later
@@ -26,7 +26,7 @@ add_action('before_woocommerce_init', function () {
     }
 });
 
-define('CTBAG_VERSION', '2.0.8');
+define('CTBAG_VERSION', '2.0.9');
 define('CTBAG_DIR', plugin_dir_path(__FILE__));
 define('CTBAG_URL', plugin_dir_url(__FILE__));
 

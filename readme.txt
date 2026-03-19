@@ -1,12 +1,12 @@
 === CartTrigger – BAG ===
-Contributors: poletto1976
+Contributors: polettoespana
 Tags: woocommerce, brands, awards, gallery, brand management
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
 WC tested up to: 10.6.1
 Requires Plugins: woocommerce
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,6 +97,9 @@ If you use LiteSpeed Cache and notice that brand pages are slow after a product 
 5. Frontend gallery with WooCommerce lightbox active.
 
 == Changelog ==
+
+= 2.0.9 =
+* Fix: corrected Contributors username in readme.txt to match the WordPress.org plugin owner account.
 
 = 2.0.8 =
 * Perf: PhotoSwipe CSS and JS are now enqueued only on brand pages that have a gallery, instead of on every brand page. Brands without a gallery no longer load 4 unnecessary assets (2 CSS + 2 JS).
