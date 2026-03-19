@@ -125,6 +125,10 @@ Tested with WordPress **6.9** and WooCommerce **10.6.0**.
 
 ## Changelog
 
+### 2.0.9
+
+- Fix: corrected Contributors username in readme.txt to match the WordPress.org plugin owner account (`polettoespana`).
+
 ### 2.0.8
 
 - Perf: PhotoSwipe CSS and JS are now enqueued only on brand pages that have a gallery. Brands without a gallery no longer load 4 unnecessary assets (2 CSS + 2 JS).
