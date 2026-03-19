@@ -115,7 +115,7 @@ All modules are grouped in collapsible card panels with a built-in shortcode ref
 - WooCommerce _(required, 8.0+ recommended)_
 - PHP **7.4** or later
 
-Tested with WordPress **6.9** and WooCommerce **10.6.0**.
+Tested with WordPress **6.9** and WooCommerce **10.6.1**.
 
 ## Installation
 
