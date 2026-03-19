@@ -90,11 +90,8 @@ If you use LiteSpeed Cache and notice that brand pages are slow after a product 
 
 == Screenshots ==
 
-1. Brand edit screen — plugin banner and module cards.
-2. Custom Fields module with key–value repeater.
-3. Awards module with logo upload, event, and year fields.
-4. Gallery module with multi-image uploader.
-5. Frontend gallery with WooCommerce lightbox active.
+1. Brand edit screen — plugin banner with HTML Description module (TinyMCE editor).
+2. Custom Fields, Awards, and Gallery modules with drag & drop support.
 
 == Changelog ==
 
