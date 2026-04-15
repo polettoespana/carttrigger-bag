@@ -4,7 +4,7 @@ Tags: woocommerce, brands, awards, gallery, brand management
 Requires at least: 6.3
 Tested up to: 6.9
 Requires PHP: 7.4
-WC tested up to: 10.6.1
+WC tested up to: 10.7.0
 Requires Plugins: woocommerce
 Stable tag: 2.0.9
 License: GPLv2 or later
@@ -64,7 +64,7 @@ All brand meta fields are presented in a clean, card-based admin interface group
 Yes. WooCommerce must be active before activating CartTrigger – BAG. The plugin declares a `Requires Plugins: woocommerce` dependency.
 
 = Does it require a specific WooCommerce version? =
-WooCommerce 8.0 or higher is recommended. The plugin has been tested up to WooCommerce 10.6.1.
+WooCommerce 8.0 or higher is recommended. The plugin has been tested up to WooCommerce 10.7.0.
 
 = Can I use Tailwind CSS classes in the shortcode attributes? =
 Yes, but classes containing square brackets (e.g. `text-[11px]`) will be interpreted as shortcode closing tags by WordPress. Use the PHP helper functions instead — they bypass the shortcode parser entirely.
@@ -111,7 +111,7 @@ If you use LiteSpeed Cache and notice that brand pages are slow after a product 
 = 2.0.5 =
 * Compliance: renamed all shortcodes and PHP helper functions from `ctb_*` to `ctbag_*` to meet the WordPress.org 5-character prefix requirement (`ctbag` = CartTrigger BAG).
 * Compliance: extracted inline gallery lightbox JavaScript to an external file (`assets/js/ctbag-gallery-lightbox.js`) loaded via `wp_enqueue_script()`.
-* Compatibility: WC tested up to 10.6.1.
+* Compatibility: WC tested up to 10.7.0.
 
 = 2.0.4 =
 * New: Gallery — individual image removal with an × button that appears on hover, without reopening the media uploader.
