@@ -6,7 +6,7 @@ Tested up to: 7.0
 Requires PHP: 7.4
 WC tested up to: 10.7.0
 Requires Plugins: woocommerce
-Stable tag: 2.0.9
+Stable tag: 2.0.10
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,10 @@ If you use LiteSpeed Cache and notice that brand pages are slow after a product 
 2. Custom Fields, Awards, and Gallery modules with drag & drop support.
 
 == Changelog ==
+
+= 2.0.10 =
+* Compatibility: WordPress 7.0.
+* Fix: replaced str_ends_with() with PHP 7.4 compatible equivalent.
 
 = 2.0.9 =
 * Fix: corrected Contributors username in readme.txt to match the WordPress.org plugin owner account.
