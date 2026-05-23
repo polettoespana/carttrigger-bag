@@ -964,7 +964,7 @@ class CTBAG_CartTrigger_BAG
     private function ctb_decode_classes(array $atts): array
     {
         foreach ($atts as $key => $value) {
-            if (str_ends_with($key, '_class') && is_string($value)) {
+            if (substr($key, -6) === '_class' && is_string($value)) {
                 $atts[$key] = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             }
         }

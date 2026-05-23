@@ -2,7 +2,7 @@
 Contributors: polettoespana
 Tags: woocommerce, brands, awards, gallery, brand management
 Requires at least: 6.3
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
 WC tested up to: 10.7.0
 Requires Plugins: woocommerce
