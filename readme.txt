@@ -2,11 +2,11 @@
 Contributors: polettoespana
 Tags: woocommerce, brands, awards, gallery, brand management
 Requires at least: 6.3
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 WC tested up to: 10.7.0
 Requires Plugins: woocommerce
-Stable tag: 2.0.10
+Stable tag: 2.0.11
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,10 @@ If you use LiteSpeed Cache and notice that brand pages are slow after a product 
 2. Custom Fields, Awards, and Gallery modules with drag & drop support.
 
 == Changelog ==
+
+= 2.0.11 =
+* Compatibility: WordPress 7.1. Verified in production; jQuery UI 1.14.2 sortable usage in the admin UI reviewed — no changes required.
+* Housekeeping: added "Requires at least" and "Requires PHP" fields to the plugin file header (Plugin Check).
 
 = 2.0.10 =
 * Compatibility: WordPress 7.0.

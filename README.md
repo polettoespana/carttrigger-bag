@@ -1,7 +1,7 @@
 # CartTrigger – BAG
 
 <p>
-  <img src="https://img.shields.io/badge/version-2.0.9-0a0a23?style=flat-square" alt="Version 2.0.9">
+  <img src="https://img.shields.io/badge/version-2.0.11-0a0a23?style=flat-square" alt="Version 2.0.11">
   <img src="https://img.shields.io/badge/WordPress-6.3%2B-3858e9?style=flat-square&logo=wordpress&logoColor=white" alt="WordPress 6.3+">
   <img src="https://img.shields.io/badge/WooCommerce-required-96588a?style=flat-square&logo=woocommerce&logoColor=white" alt="WooCommerce required">
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=flat-square&logo=php&logoColor=white" alt="PHP 7.4+">
@@ -115,7 +115,7 @@ All modules are grouped in collapsible card panels with a built-in shortcode ref
 - WooCommerce _(required, 8.0+ recommended)_
 - PHP **7.4** or later
 
-Tested with WordPress **6.9** and WooCommerce **10.6.1**.
+Tested with WordPress **7.1** and WooCommerce **10.7.0**.
 
 ## Installation
 
@@ -124,6 +124,11 @@ Tested with WordPress **6.9** and WooCommerce **10.6.1**.
 3. Navigate to **Products → Brands** and edit any brand to start adding content.
 
 ## Changelog
+
+### 2.0.11
+
+- Compatibility: WordPress 7.1 (verified in production; jQuery UI 1.14.2 sortable usage in the admin UI reviewed — no changes needed).
+- Housekeeping: added `Requires at least` / `Requires PHP` to the plugin file header.
 
 ### 2.0.9
 

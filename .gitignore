@@ -1,1 +1,5 @@
 svn-assets/
+.locks/
+design-log/
+.plan/
+.claude-designlog-hooks.log
