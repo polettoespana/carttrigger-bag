@@ -6,7 +6,7 @@ Tested up to: 7.1
 Requires PHP: 7.4
 WC tested up to: 10.7.0
 Requires Plugins: woocommerce
-Stable tag: 2.0.11
+Stable tag: 2.0.12
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,10 @@ If you use LiteSpeed Cache and notice that brand pages are slow after a product 
 2. Custom Fields, Awards, and Gallery modules with drag & drop support.
 
 == Changelog ==
+
+= 2.0.12 =
+* Accessibility: gallery images without an alt text now get a fallback ("Brand — image N of M") so each gallery link has an accessible name.
+* Accessibility: default dt_class and year_class text colour raised from /40 to /80 opacity for WCAG AAA contrast.
 
 = 2.0.11 =
 * Compatibility: WordPress 7.1. Verified in production; jQuery UI 1.14.2 sortable usage in the admin UI reviewed — no changes required.

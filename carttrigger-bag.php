@@ -4,7 +4,7 @@
  * Plugin Name:  CartTrigger – BAG
  * Plugin URI:   https://poletto.es/nuestros-servicios/eficiencia/ct-bag
  * Description:  Enhance WooCommerce with advanced brand management, awards badges, and lifestyle galleries built into native zoom.
- * Version:      2.0.11
+ * Version:      2.0.12
  * Author:       Poletto 1976 S.L.U.
  * Author URI:   https://poletto.es
  * License:      GPLv2 or later
@@ -28,7 +28,7 @@ add_action('before_woocommerce_init', function () {
     }
 });
 
-define('CTBAG_VERSION', '2.0.11');
+define('CTBAG_VERSION', '2.0.12');
 define('CTBAG_DIR', plugin_dir_path(__FILE__));
 define('CTBAG_URL', plugin_dir_url(__FILE__));
 
@@ -222,14 +222,14 @@ class CTBAG_CartTrigger_BAG
                                 <pre style="margin:0;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">[ctbag_custom_fields
   brand="slug"
   wrapper_class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl"
-  dt_class="font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/40 mb-1"
+  dt_class="font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/80 mb-1"
   dd_class="font-inter text-sm text-blu-900"
 ]</pre>
                                 <p style="margin:12px 0 6px;font-weight:600;"><?php esc_html_e('Usage from PHP template (recommended):', 'carttrigger-bag'); ?></p>
                                 <p style="margin:0 0 6px;color:#646970;"><?php esc_html_e('The helper function bypasses the WP shortcode parser: Tailwind arbitrary-value classes (text-[11px]) work without any escaping.', 'carttrigger-bag'); ?></p>
                                 <pre style="margin:0 0 8px;overflow-x:auto;font-size:11px;background:#fff;padding:8px;border:1px solid #dcdcde;">echo ctb_custom_fields([
   'wrapper_class' => 'grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl',
-  'dt_class'      => 'font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/40 mb-1',
+  'dt_class'      => 'font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/80 mb-1',
   'dd_class'      => 'font-inter text-sm text-blu-900',
 ]);</pre>
                             </div>
@@ -317,7 +317,7 @@ class CTBAG_CartTrigger_BAG
   img_class="w-10 h-10 object-contain shrink-0 opacity-70 mt-0.5"
   name_class="font-grotesk text-sm text-blu-900 leading-snug"
   event_class="font-inter text-xs text-blu-800/60 mt-1"
-  year_class="font-mono-accent text-&#91;10px&#93; text-blu-800/40 block mt-1"
+  year_class="font-mono-accent text-&#91;10px&#93; text-blu-800/80 block mt-1"
 ]</pre>
                                 <p style="margin:12px 0 6px;font-weight:600;"><?php esc_html_e('Usage from PHP template (recommended):', 'carttrigger-bag'); ?></p>
                                 <p style="margin:0 0 6px;color:#646970;"><?php esc_html_e('The helper function bypasses the WP parser: text-[11px] classes work without escaping and the title is translated with your theme text domain.', 'carttrigger-bag'); ?></p>
@@ -328,7 +328,7 @@ class CTBAG_CartTrigger_BAG
   'img_class'     => 'w-10 h-10 object-contain shrink-0 opacity-70 mt-0.5',
   'name_class'    => 'font-grotesk text-[11px] font-semibold text-blu-900',
   'event_class'   => 'font-inter text-[10px] text-blu-800/60 mt-1',
-  'year_class'    => 'font-mono-accent text-[10px] text-blu-800/40 block mt-1',
+  'year_class'    => 'font-mono-accent text-[10px] text-blu-800/80 block mt-1',
 ]);</pre>
                             </div>
                         </details>
@@ -633,7 +633,7 @@ class CTBAG_CartTrigger_BAG
                 'img_class'    => 'w-10 h-10 object-contain shrink-0 opacity-70 mt-0.5',
                 'name_class'   => 'font-grotesk text-sm text-blu-900 leading-snug',
                 'event_class'  => 'font-inter text-xs text-blu-800/60 mt-1',
-                'year_class'   => 'font-mono-accent text-xs text-blu-800/40 block mt-1',
+                'year_class'   => 'font-mono-accent text-xs text-blu-800/80 block mt-1',
             ],
             $atts,
             'ctbag_awards'
@@ -700,7 +700,7 @@ class CTBAG_CartTrigger_BAG
             [
                 'brand'         => '',
                 'wrapper_class' => 'grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl',
-                'dt_class'      => 'font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/40 mb-1',
+                'dt_class'      => 'font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/80 mb-1',
                 'dd_class'      => 'font-inter text-sm text-blu-900',
             ],
             $atts,
@@ -792,13 +792,27 @@ class CTBAG_CartTrigger_BAG
         <?php if ($atts['line_class'] !== '') : ?>
             <div class="<?php echo esc_attr($atts['line_class']) ?>"></div>
         <?php endif; ?>
+        <?php
+        // Only images that actually resolve, so "image N of M" counts what is shown.
+        $items = [];
+        foreach ($ids as $img_id) {
+            $full_src = wp_get_attachment_image_src($img_id, $atts['size_full']);
+            if ($full_src) {
+                $items[] = [$img_id, $full_src];
+            }
+        }
+        $total = count($items);
+        ?>
         <div class="<?php echo esc_attr($wrapper_class) ?>">
-            <?php foreach ($ids as $img_id) :
-                $full_src  = wp_get_attachment_image_src($img_id, $atts['size_full']);
-                if (! $full_src) continue;
+            <?php foreach ($items as $index => [$img_id, $full_src]) :
                 [$full_url, $full_w, $full_h] = $full_src;
                 $thumb_url = wp_get_attachment_image_url($img_id, $atts['size_thumb']) ?: $full_url;
                 $alt       = get_post_meta($img_id, '_wp_attachment_image_alt', true) ?: '';
+                if ($alt === '') {
+                    // Fallback so each gallery link has an accessible name (WCAG 2.4.4 / 4.1.2).
+                    /* translators: 1: brand name, 2: image position, 3: total number of images */
+                    $alt = sprintf(__('%1$s — image %2$d of %3$d', 'carttrigger-bag'), $term->name, $index + 1, $total);
+                }
             ?>
                 <?php if ($use_lb) : ?>
                 <a href="<?php echo esc_url($full_url) ?>"

@@ -1,7 +1,7 @@
 # CartTrigger – BAG
 
 <p>
-  <img src="https://img.shields.io/badge/version-2.0.11-0a0a23?style=flat-square" alt="Version 2.0.11">
+  <img src="https://img.shields.io/badge/version-2.0.12-0a0a23?style=flat-square" alt="Version 2.0.12">
   <img src="https://img.shields.io/badge/WordPress-6.3%2B-3858e9?style=flat-square&logo=wordpress&logoColor=white" alt="WordPress 6.3+">
   <img src="https://img.shields.io/badge/WooCommerce-required-96588a?style=flat-square&logo=woocommerce&logoColor=white" alt="WooCommerce required">
   <img src="https://img.shields.io/badge/PHP-7.4%2B-777bb4?style=flat-square&logo=php&logoColor=white" alt="PHP 7.4+">
@@ -34,7 +34,7 @@ On a brand taxonomy page the `brand` attribute is optional — the plugin auto-d
 [ctbag_custom_fields
   brand="slug"
   wrapper_class="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-2xl"
-  dt_class="font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/40 mb-1"
+  dt_class="font-grotesk text-xs font-semibold uppercase tracking-widest text-blu-800/80 mb-1"
   dd_class="font-inter text-sm text-blu-900"
 ]
 ```
@@ -52,7 +52,7 @@ On a brand taxonomy page the `brand` attribute is optional — the plugin auto-d
   img_class="w-10 h-10 object-contain shrink-0 opacity-70 mt-0.5"
   name_class="font-grotesk text-sm text-blu-900 leading-snug"
   event_class="font-inter text-xs text-blu-800/60 mt-1"
-  year_class="font-mono-accent text-xs text-blu-800/40 block mt-1"
+  year_class="font-mono-accent text-xs text-blu-800/80 block mt-1"
 ]
 ```
 
@@ -124,6 +124,11 @@ Tested with WordPress **7.1** and WooCommerce **10.7.0**.
 3. Navigate to **Products → Brands** and edit any brand to start adding content.
 
 ## Changelog
+
+### 2.0.12
+
+- Accessibility: gallery images without an alt text now get a fallback ("Brand — image N of M") so each gallery link has an accessible name.
+- Accessibility: default `dt_class` and `year_class` text colour raised from /40 to /80 opacity for WCAG AAA contrast.
 
 ### 2.0.11
 

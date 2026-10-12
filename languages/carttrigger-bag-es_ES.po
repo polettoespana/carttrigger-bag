@@ -4,9 +4,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: CartTrigger – BAG 2.0.0\n"
-"Report-Msgid-Bugs-To: https://poletto.es\n"
-"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"Project-Id-Version: CartTrigger – BAG 2.0.12\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/carttrigger-bag\n"
+"POT-Creation-Date: 2026-10-12T13:21:51+00:00\n"
 "PO-Revision-Date: 2024-01-01 00:00+0000\n"
 "Last-Translator: Poletto 1976 S.L.U. <info@poletto.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -18,102 +18,152 @@ msgstr ""
 "X-Generator: CartTrigger BAG\n"
 "X-Domain: carttrigger-bag\n"
 
+#. Plugin Name of the plugin
 #: carttrigger-bag.php
+msgid "CartTrigger – BAG"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: carttrigger-bag.php
+msgid "https://poletto.es/nuestros-servicios/eficiencia/ct-bag"
+msgstr ""
+
+#. Description of the plugin
+#: carttrigger-bag.php
+msgid ""
+"Enhance WooCommerce with advanced brand management, awards badges, and "
+"lifestyle galleries built into native zoom."
+msgstr ""
+
+#. Author of the plugin
+#: carttrigger-bag.php
+msgid "Poletto 1976 S.L.U."
+msgstr ""
+
+#. Author URI of the plugin
+#: carttrigger-bag.php
+msgid "https://poletto.es"
+msgstr ""
+
+#: carttrigger-bag.php:114
 msgid "Select image"
 msgstr "Seleccionar imagen"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:115
 msgid "Use image"
 msgstr "Usar imagen"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:116 carttrigger-bag.php:195
 msgid "Label"
 msgstr "Etiqueta"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:117 carttrigger-bag.php:200
 msgid "Value"
 msgstr "Valor"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:118 carttrigger-bag.php:271
 msgid "Award name"
 msgstr "Nombre del premio"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:119 carttrigger-bag.php:276
 msgid "Event (e.g. Vinum Extra 2024)"
 msgstr "Manifestación (p. ej. Vinum Extra 2024)"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:120 carttrigger-bag.php:281
 msgid "Year"
 msgstr "Año"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:158 carttrigger-bag.php:446
 msgid "HTML Description"
 msgstr "Descripción HTML"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:185 carttrigger-bag.php:470
 msgid "Custom Fields"
 msgstr "Campos personalizados"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:207 carttrigger-bag.php:475
 msgid "+ Add field"
 msgstr "+ Añadir campo"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:211 carttrigger-bag.php:293 carttrigger-bag.php:371
 msgid "HTML structure and customisable classes"
 msgstr "Estructura HTML y clases personalizables"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:214 carttrigger-bag.php:296 carttrigger-bag.php:374
 msgid "Generated structure:"
 msgstr "Estructura generada:"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:221 carttrigger-bag.php:309 carttrigger-bag.php:390
 msgid "Shortcode attributes (with defaults):"
 msgstr "Atributos del shortcode (con valores por defecto):"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:228 carttrigger-bag.php:322 carttrigger-bag.php:403
 msgid "Usage from PHP template (recommended):"
 msgstr "Uso desde plantilla PHP (recomendado):"
 
-#: carttrigger-bag.php
-msgid "The helper function bypasses the WP shortcode parser: Tailwind arbitrary-value classes (text-[11px]) work without any escaping."
-msgstr "La función helper bypassa el parser de shortcodes de WP: las clases Tailwind con valores arbitrarios (text-[11px]) funcionan sin ningún escaping."
+#: carttrigger-bag.php:229
+msgid ""
+"The helper function bypasses the WP shortcode parser: Tailwind arbitrary-"
+"value classes (text-[11px]) work without any escaping."
+msgstr ""
+"La función helper bypassa el parser de shortcodes de WP: las clases Tailwind "
+"con valores arbitrarios (text-[11px]) funcionan sin ningún escaping."
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:248 carttrigger-bag.php:486 carttrigger-bag.php:628
 msgid "Awards"
 msgstr "Premios"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:265
 msgid "Logo"
 msgstr "Logo"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:289 carttrigger-bag.php:491
 msgid "+ Add award"
 msgstr "+ Añadir premio"
 
-#: carttrigger-bag.php
-msgid "The helper function bypasses the WP parser: text-[11px] classes work without escaping and the title is translated with your theme text domain."
-msgstr "La función helper bypassa el parser de WP: las clases text-[11px] funcionan sin escaping y el título se traduce con el text domain de tu tema."
+#: carttrigger-bag.php:323 carttrigger-bag.php:404
+msgid ""
+"The helper function bypasses the WP parser: text-[11px] classes work without "
+"escaping and the title is translated with your theme text domain."
+msgstr ""
+"La función helper bypassa el parser de WP: las clases text-[11px] funcionan "
+"sin escaping y el título se traduce con el text domain de tu tema."
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:346 carttrigger-bag.php:502 carttrigger-bag.php:750
 msgid "Gallery"
 msgstr "Galería"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:359
+msgid "Remove"
+msgstr ""
+
+#: carttrigger-bag.php:367 carttrigger-bag.php:508
 msgid "Manage gallery"
 msgstr "Gestionar galería"
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:388
 msgid "Native WooCommerce lightbox (PhotoSwipe):"
 msgstr "Lightbox nativo WooCommerce (PhotoSwipe):"
 
-#: carttrigger-bag.php
-msgid "Add lightbox=\"1\" to open images in the native WooCommerce lightbox. Without this attribute images open in a new tab (default behaviour)."
-msgstr "Añade lightbox=\"1\" para abrir las imágenes en el lightbox nativo de WooCommerce. Sin este atributo las imágenes se abren en nueva pestaña (comportamiento por defecto)."
+#: carttrigger-bag.php:389
+msgid ""
+"Add lightbox=\"1\" to open images in the native WooCommerce lightbox. "
+"Without this attribute images open in a new tab (default behaviour)."
+msgstr ""
+"Añade lightbox=\"1\" para abrir las imágenes en el lightbox nativo de "
+"WooCommerce. Sin este atributo las imágenes se abren en nueva pestaña "
+"(comportamiento por defecto)."
 
-#: carttrigger-bag.php
+#. translators: 1: brand name, 2: image position, 3: total number of images
+#: carttrigger-bag.php:814
+#, php-format
+msgid "%1$s — image %2$d of %3$d"
+msgstr "%1$s — imagen %2$d de %3$d"
+
+#: carttrigger-bag.php:1053
 msgid "activated successfully."
 msgstr "activado correctamente."
 
-#: carttrigger-bag.php
+#: carttrigger-bag.php:1055
 msgid "Manage brands"
 msgstr "Gestionar marcas"
